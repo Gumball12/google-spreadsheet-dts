@@ -27,5 +27,8 @@
       "eslint --fix",
       "prettier --parser=typescript --write"
     ]
+  },
+  "dependencies": {
+    "public-google-sheets-parser": "^1.3.2"
   }
 }
