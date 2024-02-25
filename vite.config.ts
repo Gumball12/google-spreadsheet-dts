@@ -12,5 +12,8 @@ export default defineConfig({
       },
       name: 'googleSpreadsheetDts',
     },
+    rollupOptions: {
+      external: ['node:fs'],
+    },
   },
 });
