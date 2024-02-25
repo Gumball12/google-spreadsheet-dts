@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { publicGoogleSheetsParser } from '../parser/publicGoogleSheetsParser';
+import { publicGoogleSheetsParser } from '../parser';
 
 const SPREADSHEET_ID = '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo';
 

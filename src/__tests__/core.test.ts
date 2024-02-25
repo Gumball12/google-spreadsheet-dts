@@ -22,6 +22,10 @@ describe('createDts', () => {
       h: 'string\'',
       i: "'a'|'b' |    'c'|",
       j: { k: "string | string'" },
+      l: "1 | '1'",
+      m: 1,
+      n: '1',
+      o: '"1"',
     });
 
     expect(dts).toBe(
@@ -35,6 +39,10 @@ describe('createDts', () => {
         "h: 'string'",
         "i: 'a' | 'b' | 'c'",
         "j: {\n      k: string | 'string'\n    }",
+        "l: 1 | '1'",
+        'm: 1',
+        'n: 1',
+        "o: '1'",
       ]),
     );
   });
