@@ -24,31 +24,31 @@ describe('publicGoogleSheetsParser', () => {
   };
 
   it('Common forms', async () => {
-    const parsed = await publicGoogleSheetsParser(
-      SPREADSHEET_ID,
-      ['Key', 'Property'],
-      'Type',
-      {
+    const parsed = await publicGoogleSheetsParser({
+      spreadsheetId: SPREADSHEET_ID,
+      path: ['Key', 'Property'],
+      typeName: 'Type',
+      options: {
         publicGoogleSheetsParser: {
           sheetName: SHEET_NAME,
         },
       },
-    );
+    });
 
     expect(parsed).toEqual(expected);
   });
 
   it('With empty lines', async () => {
-    const parsed = await publicGoogleSheetsParser(
-      SPREADSHEET_ID,
-      ['Key', 'Property'],
-      'Type',
-      {
+    const parsed = await publicGoogleSheetsParser({
+      spreadsheetId: SPREADSHEET_ID,
+      path: ['Key', 'Property'],
+      typeName: 'Type',
+      options: {
         publicGoogleSheetsParser: {
           sheetName: `${SHEET_NAME}-EmptyLines`,
         },
       },
-    );
+    });
 
     expect(parsed).toEqual(expected);
   });

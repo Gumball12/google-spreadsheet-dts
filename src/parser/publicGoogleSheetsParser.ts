@@ -12,12 +12,19 @@ type Options = Partial<{
   createDts: CreateDtsOptions;
 }>;
 
-export const publicGoogleSheetsParser = async (
-  spreadsheetId: string,
-  path: string[],
-  typeName: string,
-  options?: Options,
-): Promise<object> => {
+type Params = {
+  spreadsheetId: string;
+  path: string[];
+  typeName: string;
+  options?: Options;
+};
+
+export const publicGoogleSheetsParser = async ({
+  spreadsheetId,
+  path,
+  typeName,
+  options,
+}: Params): Promise<object> => {
   const parser = new PublicGoogleSheetsParser(
     spreadsheetId,
     options?.publicGoogleSheetsParser,
