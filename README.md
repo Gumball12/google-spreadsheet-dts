@@ -15,6 +15,7 @@
 ### TODO
 
 - CLI (`npx google-spreadsheet-dts ...`)
+- Private Google Sheets parser
 
 ## 📦 Install
 
