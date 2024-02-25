@@ -33,12 +33,12 @@ describe('createDts', () => {
         'a: string',
         'b: 1',
         'c: true',
-        'd: {\n      e: string\n    }',
+        'd: {\n      e: string;\n    }',
         "f: 'string'",
         "g: 'string'",
         "h: 'string'",
         "i: 'a' | 'b' | 'c'",
-        "j: {\n      k: string | 'string'\n    }",
+        "j: {\n      k: string | 'string';\n    }",
         "l: 1 | '1'",
         'm: 1',
         'n: 1',
@@ -69,10 +69,10 @@ describe('createDts', () => {
     expect(dts).toBe(
       `${PREFIX}
 import { A } from './a';
-export {}
+export {};
 declare global {
   export interface ${name} {
-    a: A
+    a: A;
   }
 }`,
     );
@@ -80,9 +80,9 @@ declare global {
 });
 
 const getDtsBody = (name: string, fieldList: string[]) => {
-  const body = fieldList.map(field => `    ${field}`).join('\n');
+  const body = fieldList.map(field => `    ${field};`).join('\n');
   return `${PREFIX}
-export {}
+export {};
 declare global {
   export interface ${name} {
 ${body}

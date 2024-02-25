@@ -26,7 +26,7 @@ export const createDts = (
     INFO,
     IGNORES,
     imports,
-    'export {}',
+    'export {};',
     'declare global {',
     `  export interface ${name} ${body}`,
     '}',
@@ -60,28 +60,31 @@ const createItem = <T>(
   for (const name in object) {
     const value = object[name];
     const prefix = `${spaceString}${name}: `;
+    const postfix = ';';
 
     if (!value) {
-      result.push(`${prefix}${options.defaultType}`);
+      result.push(`${prefix}${options.defaultType}${postfix}`);
       continue;
     }
 
     if (typeof value === 'object') {
-      result.push(`${prefix}${createItem(value, space + 2, options)}`);
+      result.push(
+        `${prefix}${createItem(value, space + 2, options)}${postfix}`,
+      );
       continue;
     }
 
     if (isUnionValue(value)) {
-      result.push(`${prefix}${getUnionValue(value)}`);
+      result.push(`${prefix}${getUnionValue(value)}${postfix}`);
       continue;
     }
 
     if (isStringValue(value)) {
-      result.push(`${prefix}${getStringValue(value)}`);
+      result.push(`${prefix}${getStringValue(value)}${postfix}`);
       continue;
     }
 
-    result.push(`${prefix}${value}`);
+    result.push(`${prefix}${value}${postfix}`);
   }
 
   result.push(`${' '.repeat(space - 2)}}`);

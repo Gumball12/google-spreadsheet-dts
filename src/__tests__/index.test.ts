@@ -26,12 +26,12 @@ describe('generateDts', () => {
 /* prettier-ignore */
 // @ts-nocheck
 // noinspection JSUnusedGlobalSymbols
-export {}
+export {};
 declare global {
   export interface GenerateDts {
-    a: string
-    b: 1
-    c: '1'
+    a: string;
+    b: 1;
+    c: '1';
   }
 }`,
     );
@@ -53,12 +53,12 @@ declare global {
 /* prettier-ignore */
 // @ts-nocheck
 // noinspection JSUnusedGlobalSymbols
-export {}
+export {};
 declare global {
   export interface GenerateDts {
-    a: string
-    b: 1
-    c: '1'
+    a: string;
+    b: 1;
+    c: '1';
   }
 }`,
     );
