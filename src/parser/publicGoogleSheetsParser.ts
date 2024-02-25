@@ -19,52 +19,49 @@ type Params = {
   options?: Options;
 };
 
-export const publicGoogleSheetsParser = async ({
-  spreadsheetId,
-  path,
-  typeName,
-  options,
-}: Params): Promise<object> => {
-  const parser = new PublicGoogleSheetsParser(
-    spreadsheetId,
-    options?.publicGoogleSheetsParser,
-  );
-  const data = await parser.parse();
+export const publicGoogleSheetsParser =
+  ({ spreadsheetId, path, typeName, options }: Params) =>
+  async (): Promise<object> => {
+    const parser = new PublicGoogleSheetsParser(
+      spreadsheetId,
+      options?.publicGoogleSheetsParser,
+    );
+    const data = await parser.parse();
 
-  const filledData = data.map((item, index, data) => {
-    if (index === 0) {
+    const filledData = data.map((item, index, data) => {
+      if (index === 0) {
+        return item;
+      }
+
+      for (const p of path) {
+        if (!item[p]) {
+          item[p] = data[index - 1][p];
+        }
+      }
+
       return item;
-    }
+    });
 
-    for (const p of path) {
-      if (!item[p]) {
-        item[p] = data[index - 1][p];
-      }
-    }
+    const result = filledData.reduce((acc, item) => {
+      let current = acc;
 
-    return item;
-  });
+      for (let i = 0; i < path.length - 1; i++) {
+        const p = path[i];
+        const name = item[p];
 
-  const result = filledData.reduce((acc, item) => {
-    let current = acc;
+        if (!current[name]) {
+          current[name] = {};
+        }
 
-    for (let i = 0; i < path.length - 1; i++) {
-      const p = path[i];
-      const name = item[p];
-
-      if (!current[name]) {
-        current[name] = {};
+        current = current[name];
       }
 
-      current = current[name];
-    }
+      const last = path[path.length - 1];
+      const name = item[last];
+      current[name] = item[typeName];
 
-    const last = path[path.length - 1];
-    const name = item[last];
-    current[name] = item[typeName];
+      return acc;
+    }, {} as unknown);
 
-    return acc;
-  }, {} as unknown);
-
-  return result;
-};
+    return result;
+  };

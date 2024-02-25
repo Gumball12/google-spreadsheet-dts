@@ -33,7 +33,7 @@ describe('publicGoogleSheetsParser', () => {
           sheetName: SHEET_NAME,
         },
       },
-    });
+    })();
 
     expect(parsed).toEqual(expected);
   });
@@ -48,7 +48,7 @@ describe('publicGoogleSheetsParser', () => {
           sheetName: `${SHEET_NAME}-EmptyLines`,
         },
       },
-    });
+    })();
 
     expect(parsed).toEqual(expected);
   });
