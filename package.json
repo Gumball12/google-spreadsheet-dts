@@ -2,6 +2,14 @@
   "name": "google-spreadsheet-dts",
   "version": "0.0.1",
   "type": "module",
+  "packageManager": "pnpm@8.15.2",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=20.0.0",
+    "yarn": "please-use-pnpm",
+    "npm": "please-use-pnpm",
+    "pnpm": ">=8.0.0"
+  },
   "scripts": {
     "build": "tsc && vite build",
     "lint": "eslint --ext .ts ./**/src/**.ts",
