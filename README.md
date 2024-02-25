@@ -6,6 +6,8 @@
 
 ![logo](./docs/logo-extended.png)
 
+This library automatically generates TypeScript types (`*.d.ts`) by parsing Google Sheets.
+
 ## 💫 Features
 
 - [Parser presets](./src/parser) for public and private Google Sheets
