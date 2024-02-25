@@ -9,26 +9,45 @@ const IGNORES = [
 
 export type CreateDtsOptions = Partial<{
   defaultType: string;
+  importTypes: Import[];
 }>;
+
+type Import = { name: string; from: string };
 
 export const createDts = (
   name: string,
   object: object,
   options = {} as CreateDtsOptions,
-) => {
+): string => {
   const body = createItem(object, 4, defaultOptions(options));
+  const imports = createImport(options.importTypes || []);
 
-  return `${INFO}
-${IGNORES}
-export {}
-declare global {
-  export interface ${name} ${body}
-}`;
+  const result = [
+    INFO,
+    IGNORES,
+    imports,
+    'export {}',
+    'declare global {',
+    `  export interface ${name} ${body}`,
+    '}',
+  ]
+    .filter(v => v)
+    .join('\n');
+
+  return result;
 };
 
 const defaultOptions = (options: CreateDtsOptions) => ({
   defaultType: options.defaultType || 'any',
 });
+
+const createImport = (imports: Import[]) => {
+  if (!imports.length) {
+    return;
+  }
+
+  return imports.map(i => `import { ${i.name} } from '${i.from}';`).join('\n');
+};
 
 const createItem = <T>(
   object: T,
