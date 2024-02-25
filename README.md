@@ -1,6 +1,6 @@
 # google-spreadsheet-dts
 
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/google-spreadsheet-dts)](https://www.npmjs.com/package/google-spreadsheet-dts) ![[npm downloads]((https://img.shields.io/bundlephobia/minzip/google-spreadsheet-dts))](https://img.shields.io/npm/dm/google-spreadsheet-dts) ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/Gumball12/google-spreadsheet-dts?filename=package.json)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/google-spreadsheet-dts) ![NPM Downloads](https://img.shields.io/npm/dm/google-spreadsheet-dts) ![NPM Version](https://img.shields.io/npm/v/google-spreadsheet-dts)
 
 [![ci](https://github.com/Gumball12/google-spreadsheet-dts/actions/workflows/ci.yaml/badge.svg)](https://github.com/Gumball12/google-spreadsheet-dts/actions/workflows/ci.yaml) [![publish](https://github.com/Gumball12/google-spreadsheet-dts/actions/workflows/publish-npm.yaml/badge.svg)](https://github.com/Gumball12/google-spreadsheet-dts/actions/workflows/publish-npm.yaml) [![codecov](https://codecov.io/gh/Gumball12/google-spreadsheet-dts/graph/badge.svg?token=8uuKMCW2bk)](https://codecov.io/gh/Gumball12/google-spreadsheet-dts) [![changelog](https://img.shields.io/badge/CHANGELOG-gray)](./CHANGELOG.md)
 
