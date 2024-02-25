@@ -31,6 +31,7 @@ jobs:
         run: pnpm install
 
       - run: pnpm run lint
+      - run: pnpm run build
       - run: pnpm run test
 
       - uses: codecov/codecov-action@v4.0.1
