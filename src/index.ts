@@ -1,17 +1,17 @@
 import { CreateDtsOptions, createDts } from './core/createDts';
 import { writeFile } from './core/writeFile';
 
-type Options = Partial<{
+type GenerateDtsOptions = Partial<{
   fileName: string;
   output: (dts: string) => unknown;
   createDts: CreateDtsOptions;
 }>;
 
-type Params = {
+type GenerateDtsParams = {
   name: string;
   parser: () => Promise<object> | object;
   directory: string;
-  options?: Options;
+  options?: GenerateDtsOptions;
 };
 
 export const generateDts = async ({
@@ -19,7 +19,7 @@ export const generateDts = async ({
   directory,
   parser,
   options = {},
-}: Params) => {
+}: GenerateDtsParams) => {
   const fileName = options.fileName || name;
 
   const parsed = await parser();
