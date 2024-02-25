@@ -2,14 +2,12 @@
 // https://github.com/fureweb-com/public-google-sheets-parser
 
 import PublicGoogleSheetsParser from 'public-google-sheets-parser';
-import { CreateDtsOptions } from '../core/createDts';
 
 type SheetName = string;
 type PublicGoogleSheetsParserOptions = { sheetName: SheetName };
 
 type Options = Partial<{
   publicGoogleSheetsParser: PublicGoogleSheetsParserOptions;
-  createDts: CreateDtsOptions;
 }>;
 
 type Params = {
