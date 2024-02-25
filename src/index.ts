@@ -7,9 +7,11 @@ type GenerateDtsOptions = Partial<{
   createDts: CreateDtsOptions;
 }>;
 
-type GenerateDtsParams = {
+type Parser = () => Promise<object> | object;
+
+export type GenerateDtsParams = {
   name: string;
-  parser: () => Promise<object> | object;
+  parser: Parser;
   directory: string;
   options?: GenerateDtsOptions;
 };
