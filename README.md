@@ -14,11 +14,6 @@ This library automatically generates TypeScript types (`*.d.ts`) by parsing Goog
 - Generate types(`*.d.ts`) for Google Sheets at the desired location
 - Customize the type and type file name
 
-### TODO
-
-- CLI (`npx google-spreadsheet-dts ...`)
-- Private Google Sheets parser
-
 ## 📦 Install
 
 ```bash
@@ -44,6 +39,8 @@ import { generateDts } from 'google-spreadsheet-dts';
 import { resolve } from 'node:path';
 import { publicGoogleSheetsParser } from 'google-spreadsheet-dts/parser';
 
+import PublicGoogleSheetsParser from 'public-google-sheets-parser';
+
 generateDts({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
@@ -58,15 +55,13 @@ generateDts({
     ]
   }
 
-  // Specify the Google Sheets to parse
-  parser: publicGoogleSheetsParser({
-    spreadSheetId: '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo',
-    path: ['Key', 'Property'],
-    typeName: 'Type',
-    publicGoogleSheetsParser: {
-      sheetName: 'ParserTest',
+  parser: publicGoogleSheetsParser(
+    new PublicGoogleSheetsParser(/* ... */),
+    {
+      path: ['Key', 'Property'],
+      typeName: 'Type',
     },
-  }),
+  ),
 });
 ```
 
@@ -86,6 +81,8 @@ const { generateDts } = require('google-spreadsheet-dts');
 const { resolve } = require('node:path');
 const { publicGoogleSheetsParser } = require('google-spreadsheet-dts/parser');
 
+const PublicGoogleSheetsParser = require('public-google-sheets-parser');
+
 generateDts({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
@@ -99,14 +96,13 @@ generateDts({
     ]
   }
 
-  parser: publicGoogleSheetsParser({
-    spreadSheetId: '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo',
-    path: ['Key', 'Property'],
-    typeName: 'Type',
-    publicGoogleSheetsParser: {
-      sheetName: 'ParserTest',
+  parser: publicGoogleSheetsParser(
+    new PublicGoogleSheetsParser(/* ... */),
+    {
+      path: ['Key', 'Property'],
+      typeName: 'Type',
     },
-  }),
+  ),
 });
 ```
 

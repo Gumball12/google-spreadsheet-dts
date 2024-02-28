@@ -5,7 +5,7 @@
 
 ## public-google-sheets-parser
 
-A parser that parses public Google Sheets. This parser uses [public-google-sheets-parser](https://github.com/fureweb-com/public-google-sheets-parser).
+A parser that parses **public** Google Sheets. This parser uses [public-google-sheets-parser](https://github.com/fureweb-com/public-google-sheets-parser).
 
 ### Usage
 
@@ -13,14 +13,16 @@ A parser that parses public Google Sheets. This parser uses [public-google-sheet
 import { generateDts } from 'google-spreadsheet-dts';
 import { publicGoogleSheetsParser } from 'google-spreadsheet-dts/parser';
 
-const parser = publicGoogleSheetsParser({
-  spreadSheetId: '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo',
-  path: ['Key', 'Property'],
-  typeName: 'Type',
-  publicGoogleSheetsParser: {
-    sheetName: 'ParserTest',
+import PublicGoogleSheetsParser from 'public-google-sheets-parser';
+
+const parser = publicGoogleSheetsParser(
+  new PublicGoogleSheetsParser(/* ... */),
+  {
+    publicGoogleSheetsParserInstance,
+    path: ['Key', 'Property'],
+    typeName: 'Type',
   },
-});
+);
 
 generateDts({
   name: 'GoogleSheets',
@@ -34,23 +36,18 @@ generateDts({
 #### `publicGoogleSheetsParser`
 
 ```ts
-function publicGoogleSheetsParser(options: {
-  spreadSheetId: string;
-  path: string[];
-  typeName: string;
-  publicGoogleSheetsParser: PublicGoogleSheetsParserOptions;
-}): Parser;
-
-type PublicGoogleSheetsParserOptions = {
-  sheetName: string;
-};
+function publicGoogleSheetsParser(
+  publicGoogleSheetsParserInstance: PublicGoogleSheetsParser,
+  params: {
+    path: string[];
+    typeName: string;
+  },
+): Parser;
 ```
 
-- `spreadSheetId`: Google Sheets ID
+- `publicGoogleSheetsParserInstance`: An instance of [`PublicGoogleSheetsParser`](https://github.com/fureweb-com/public-google-sheets-parser?tab=readme-ov-file#usage-example)
 - `path`: List of column names where object property names exists
 - `typeName`: Column name where the type name exists
-- `publicGoogleSheets`
-  - `sheetName`: Google Sheets sheet name
 
 For example, given the following Google Sheets:
 

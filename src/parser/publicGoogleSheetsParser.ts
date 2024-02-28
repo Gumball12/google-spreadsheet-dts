@@ -1,30 +1,20 @@
 // Parser for public-google-sheets-parser
 // https://github.com/fureweb-com/public-google-sheets-parser
 
-import PublicGoogleSheetsParser from 'public-google-sheets-parser';
+import type PublicGoogleSheetsParser from 'public-google-sheets-parser';
 
-type SheetName = string;
-type PublicGoogleSheetsParserOptions = { sheetName: SheetName };
-
-type Options = Partial<{
-  publicGoogleSheetsParser: PublicGoogleSheetsParserOptions;
-}>;
-
-type Params = {
-  spreadsheetId: string;
+type PublicGoogleSheetsParserParams = {
   path: string[];
   typeName: string;
-  options?: Options;
 };
 
 export const publicGoogleSheetsParser =
-  ({ spreadsheetId, path, typeName, options }: Params) =>
+  (
+    publicGoogleSheetsParserInstance: PublicGoogleSheetsParser,
+    { path, typeName }: PublicGoogleSheetsParserParams,
+  ) =>
   async (): Promise<object> => {
-    const parser = new PublicGoogleSheetsParser(
-      spreadsheetId,
-      options?.publicGoogleSheetsParser,
-    );
-    const data = await parser.parse();
+    const data = await publicGoogleSheetsParserInstance.parse();
 
     const filledData = data.map((item, index, data) => {
       if (index === 0) {

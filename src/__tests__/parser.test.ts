@@ -1,12 +1,19 @@
 import { describe, it, expect } from 'vitest';
 import { publicGoogleSheetsParser } from '../parser';
-
-const SPREADSHEET_ID = '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo';
+import PublicGoogleSheetsParser from 'public-google-sheets-parser';
 
 // https://docs.google.com/spreadsheets/d/1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo/edit#gid=0
 const SHEET_NAME = 'ParserTest';
+const SPREADSHEET_ID = '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo';
 
 describe('publicGoogleSheetsParser', () => {
+  const publicGoogleSheetsParserInstance = new PublicGoogleSheetsParser(
+    SPREADSHEET_ID,
+    {
+      sheetName: SHEET_NAME,
+    },
+  );
+
   const expected = {
     click_conversation_data: {
       conversation_id: 'string',
@@ -24,31 +31,25 @@ describe('publicGoogleSheetsParser', () => {
   };
 
   it('Common forms', async () => {
-    const parsed = await publicGoogleSheetsParser({
-      spreadsheetId: SPREADSHEET_ID,
-      path: ['Key', 'Property'],
-      typeName: 'Type',
-      options: {
-        publicGoogleSheetsParser: {
-          sheetName: SHEET_NAME,
-        },
+    const parsed = await publicGoogleSheetsParser(
+      publicGoogleSheetsParserInstance,
+      {
+        path: ['Key', 'Property'],
+        typeName: 'Type',
       },
-    })();
+    )();
 
     expect(parsed).toEqual(expected);
   });
 
   it('With empty lines', async () => {
-    const parsed = await publicGoogleSheetsParser({
-      spreadsheetId: SPREADSHEET_ID,
-      path: ['Key', 'Property'],
-      typeName: 'Type',
-      options: {
-        publicGoogleSheetsParser: {
-          sheetName: `${SHEET_NAME}-EmptyLines`,
-        },
+    const parsed = await publicGoogleSheetsParser(
+      publicGoogleSheetsParserInstance,
+      {
+        path: ['Key', 'Property'],
+        typeName: 'Type',
       },
-    })();
+    )();
 
     expect(parsed).toEqual(expected);
   });
