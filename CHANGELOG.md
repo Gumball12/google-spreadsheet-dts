@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.0.6...v0.0.7) (2024-03-02)
+
+
+### Features
+
+* implement a parser for private google sheets ([0d61c13](https://github.com/Gumball12/google-spreadsheet-dts/commit/0d61c132cb734f29755bfb8147782f0770dd335e))
+* make the instance be passed directly ([358f039](https://github.com/Gumball12/google-spreadsheet-dts/commit/358f039090944ce22c5599132fddc7f7ac8cf102))
+* rename googleSpreadSheet.ts to googleSpreadsheet.ts ([f8f814d](https://github.com/Gumball12/google-spreadsheet-dts/commit/f8f814d927a2972678afcf3f440b1bbdd2a5c501))
+
+
+### Bug Fixes
+
+* use [@ts-ignore](https://github.com/ts-ignore) instead of [@ts-expect-error](https://github.com/ts-expect-error) ([706b3a8](https://github.com/Gumball12/google-spreadsheet-dts/commit/706b3a8a7520af23e557ec5b45428a01cb512418))
+
 ### [0.0.6](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.0.5...v0.0.6) (2024-02-25)
 
 ### [0.0.5](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.0.4...v0.0.5) (2024-02-25)
