@@ -77,7 +77,8 @@ const PRIVATE_SHEETS_SCOPES = [
 describe.skip('GoogleSpreadsheet', () => {
   it('Common forms', async () => {
     // Do not upload the private-key.json file to a public repository when testing!
-    // @ts-expect-error private-key
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const privateKey = await import('./private-key.json');
 
     const jwt = new JWT({
