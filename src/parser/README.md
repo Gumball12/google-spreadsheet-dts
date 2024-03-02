@@ -10,7 +10,7 @@ A parser that parses **public** Google Sheets. This parser uses [public-google-s
 ### Usage
 
 ```ts
-import { generateDts } from 'google-spreadsheet-dts';
+import { generateDtsFile } from 'google-spreadsheet-dts';
 import { publicGoogleSheetsParser } from 'google-spreadsheet-dts/parser';
 
 import PublicGoogleSheetsParser from 'public-google-sheets-parser';
@@ -25,7 +25,7 @@ const parser = publicGoogleSheetsParser(
 );
 
 // Generate d.ts file
-generateDts({
+generateDtsFile({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
   parser,
@@ -81,7 +81,7 @@ A parser that parses **private** Google Sheets. This parser uses [google-spreads
 ### Usage
 
 ```ts
-import { generateDts } from 'google-spreadsheet-dts';
+import { generateDtsFile } from 'google-spreadsheet-dts';
 import { googleSpreadsheet } from 'google-spreadsheet-dts/parser';
 
 import { JWT } from 'google-auth-library';
@@ -101,7 +101,7 @@ const parser = googleSpreadsheet(sheet, {
 });
 
 // Generate d.ts file
-generateDts({
+generateDtsFile({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
   parser,

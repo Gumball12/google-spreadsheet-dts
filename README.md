@@ -34,13 +34,13 @@ Create the file scripts/generate-google-sheets-dts.ts. Here we use the parser pr
 ```ts
 // scripts/generate-google-sheets-dts.ts
 
-import { generateDts } from 'google-spreadsheet-dts';
+import { generateDtsFile } from 'google-spreadsheet-dts';
 import { resolve } from 'node:path';
 import { publicGoogleSheetsParser } from 'google-spreadsheet-dts/parser';
 
 import PublicGoogleSheetsParser from 'public-google-sheets-parser';
 
-generateDts({
+generateDtsFile({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
 
@@ -76,13 +76,13 @@ ts-node scripts/generate-google-sheets-dts.ts
 ```js
 // scripts/generate-google-sheets-dts.js
 
-const { generateDts } = require('google-spreadsheet-dts');
+const { generateDtsFile } = require('google-spreadsheet-dts');
 const { resolve } = require('node:path');
 const { publicGoogleSheetsParser } = require('google-spreadsheet-dts/parser');
 
 const PublicGoogleSheetsParser = require('public-google-sheets-parser');
 
-generateDts({
+generateDtsFile({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
 
@@ -169,21 +169,21 @@ event({
 
 ## 📚 API
 
-### `generateDts`
+### `generateDtsFile`
 
 ```ts
-function generateDts(params: GenerateDtsParams): Promise<void>;
+function generateDtsFile(params: GenerateDtsFileParams): Promise<void>;
 
 type Params = {
   name: string;
   directory: string;
   parser: Parser;
-  options?: GenerateDtsOptions;
+  options?: GenerateDtsFileOptions;
 };
 
 type Parser = () => Promise<object> | object;
 
-type GenerateDtsOptions = Partial<{
+type GenerateDtsFileOptions = Partial<{
   fileName: string;
   output: (dts: string) => unknown;
   createDts: CreateDtsOptions;
