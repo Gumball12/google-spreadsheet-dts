@@ -13,6 +13,20 @@ This library automatically generates TypeScript types (`*.d.ts`) by parsing Goog
 - [Parser presets](./src/parser) and Generate types(`*.d.ts`) for **public and private Google Sheets**
 - Customize the type and type file name
 
+### Performance
+
+```
+MacBook Air (M1, 2020, 16GB)
+Node.js v20.10.0
+
+$ pnpm bench
+
+name                                 hz      min      max     mean      p75      p99     p995     p999      rme  samples
+generateDtsFile :: 100000 Rows  18.4037  45.8886  75.3858  54.3369  57.0195  75.3858  75.3858  75.3858  ±12.36%       10   fastest
+```
+
+[performance.bench.ts](./src/__tests__/performance.bench.ts)
+
 ## 📦 Install
 
 ```bash

@@ -45,6 +45,7 @@
     "build": "tsc && vite build",
     "lint": "eslint --ext .ts ./**/src/**.ts",
     "test": "vitest run --coverage",
+    "bench": "vitest bench --run",
     "release": "standard-version",
     "prepare": "husky"
   },
