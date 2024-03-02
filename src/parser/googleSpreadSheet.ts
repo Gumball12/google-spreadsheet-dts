@@ -1,16 +1,30 @@
-import { JWT } from 'google-auth-library';
-import { GoogleSpreadsheet } from 'google-spreadsheet';
+import { type GoogleSpreadsheetWorksheet } from 'google-spreadsheet';
+import { filledDataToObject } from './utils/filledDataToObject';
+import { FilledData } from './types/data';
 
-export const googleSpreadsheetParser = async (
-  spreadsheetId: string,
-  serviceAccountAuth: JWT,
-) => {
-  const doc = new GoogleSpreadsheet(spreadsheetId, serviceAccountAuth);
-  await doc.loadInfo();
-
-  const sheet = doc.sheetsByIndex[0];
-  await sheet.loadHeaderRow();
-
-  const rows = await sheet.getRows();
-  console.log(rows, sheet.headerValues);
+type GoogleSpreadsheetParams = {
+  path: string[];
+  typeName: string;
 };
+
+export const googleSpreadsheet =
+  (
+    sheetInstance: GoogleSpreadsheetWorksheet,
+    { path, typeName }: GoogleSpreadsheetParams,
+  ) =>
+  async (): Promise<object> => {
+    const rows = await sheetInstance.getRows();
+    const filledData = rows.reduce<FilledData>((filledData, row, index) => {
+      const prevData = filledData[index - 1];
+      const data = [...path, typeName].reduce<FilledData[number]>((acc, p) => {
+        const item = row.get(p) || prevData[p];
+        acc[p] = item;
+        return acc;
+      }, {});
+
+      filledData.push(data);
+      return filledData;
+    }, []);
+
+    return filledDataToObject(filledData, path, typeName);
+  };

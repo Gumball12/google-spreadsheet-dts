@@ -10,8 +10,7 @@ This library automatically generates TypeScript types (`*.d.ts`) by parsing Goog
 
 ## 💫 Features
 
-- [Parser presets](./src/parser) for public and private Google Sheets
-- Generate types(`*.d.ts`) for Google Sheets at the desired location
+- [Parser presets](./src/parser) and Generate types(`*.d.ts`) for **public and private Google Sheets**
 - Customize the type and type file name
 
 ## 📦 Install

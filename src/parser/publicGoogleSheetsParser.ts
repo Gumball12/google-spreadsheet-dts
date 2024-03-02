@@ -2,6 +2,8 @@
 // https://github.com/fureweb-com/public-google-sheets-parser
 
 import type PublicGoogleSheetsParser from 'public-google-sheets-parser';
+import { FilledData } from './types/data';
+import { filledDataToObject } from './utils/filledDataToObject';
 
 type PublicGoogleSheetsParserParams = {
   path: string[];
@@ -14,42 +16,22 @@ export const publicGoogleSheetsParser =
     { path, typeName }: PublicGoogleSheetsParserParams,
   ) =>
   async (): Promise<object> => {
-    const data = await publicGoogleSheetsParserInstance.parse();
+    const parsedData = await publicGoogleSheetsParserInstance.parse();
+    const filledData = parsedData.map<FilledData[number]>(
+      (item, index, data) => {
+        if (index === 0) {
+          return item;
+        }
 
-    const filledData = data.map((item, index, data) => {
-      if (index === 0) {
+        for (const p of path) {
+          if (!item[p]) {
+            item[p] = data[index - 1][p];
+          }
+        }
+
         return item;
-      }
+      },
+    );
 
-      for (const p of path) {
-        if (!item[p]) {
-          item[p] = data[index - 1][p];
-        }
-      }
-
-      return item;
-    });
-
-    const result = filledData.reduce((acc, item) => {
-      let current = acc;
-
-      for (let i = 0; i < path.length - 1; i++) {
-        const p = path[i];
-        const name = item[p];
-
-        if (!current[name]) {
-          current[name] = {};
-        }
-
-        current = current[name];
-      }
-
-      const last = path[path.length - 1];
-      const name = item[last];
-      current[name] = item[typeName];
-
-      return acc;
-    }, {} as unknown);
-
-    return result;
+    return filledDataToObject(filledData, path, typeName);
   };

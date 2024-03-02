@@ -15,15 +15,16 @@ import { publicGoogleSheetsParser } from 'google-spreadsheet-dts/parser';
 
 import PublicGoogleSheetsParser from 'public-google-sheets-parser';
 
+// Define parser
 const parser = publicGoogleSheetsParser(
   new PublicGoogleSheetsParser(/* ... */),
   {
-    publicGoogleSheetsParserInstance,
     path: ['Key', 'Property'],
     typeName: 'Type',
   },
 );
 
+// Generate d.ts file
 generateDts({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
@@ -73,9 +74,61 @@ If `path` is `['Key', 'Property']` and `typeName` is `Type`, the return will loo
 }
 ```
 
-## google-spreadsheet-parser
+## google-spreadsheet (node-google-spreadsheet)
 
-WIP
+A parser that parses **private** Google Sheets. This parser uses [google-spreadsheet](https://github.com/theoephraim/node-google-spreadsheet).
+
+### Usage
+
+```ts
+import { generateDts } from 'google-spreadsheet-dts';
+import { googleSpreadsheet } from 'google-spreadsheet-dts/parser';
+
+import { JWT } from 'google-auth-library';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
+
+// Load private Google Sheets data
+const jwt = new JWT(/* ... */);
+const doc = new GoogleSpreadsheet(/* ... */);
+await doc.loadInfo();
+
+const sheet = doc.sheetsByIndex[0];
+
+// Define parser
+const parser = googleSpreadsheet(sheet, {
+  path: ['Key', 'Property'],
+  typeName: 'Type',
+});
+
+// Generate d.ts file
+generateDts({
+  name: 'GoogleSheets',
+  directory: resolve(__dirname, '../src'),
+  parser,
+});
+```
+
+Note that you need to pass the [sheet instance](https://theoephraim.github.io/node-google-spreadsheet/#/classes/google-spreadsheet-worksheet).
+
+### API
+
+#### `googleSpreadsheet`
+
+```ts
+function googleSpreadsheet(
+  sheetInstance: GoogleSpreadsheetWorksheet,
+  params: {
+    path: string[];
+    typeName: string;
+  },
+): Parser;
+```
+
+- `sheetInstance`: An instance of [`GoogleSpreadsheetWorksheet`](https://theoephraim.github.io/node-google-spreadsheet/#/classes/google-spreadsheet-worksheet)
+- `path`: List of column names where object property names exists
+- `typeName`: Column name where the type name exists
+
+See [publicGoogleSheetsParser API](#public-google-sheets-parser) for a detailed description of the `path` and `typeName` behavior.
 
 ## Writing a custom parser
 
