@@ -201,3 +201,49 @@ declare global {
   }
 }
 ```
+
+### `parser/filledDataToObject` Utility function
+
+This utility function takes `FilledData` type data and converts it to an `object` type. It can be useful when creating parsers.
+
+```ts
+import { filledDataToObject } from 'google-spreadsheet-dts/parser';
+
+filledDataToObject(
+  [
+    { Key: 'key1', Property: 'property1', Type: 'type1' },
+    { Key: 'key2', Property: 'property2', Type: 'type2', Other: 'other' },
+    { Key: 'key3', Property: 'property3', Type: 'MyType' },
+  ],
+  ['Key', 'Property'],
+  'Type',
+);
+
+// Returns
+({
+  key1: {
+    property1: 'type1',
+  }
+  key2: {
+    property2: 'type2',
+  }
+  key3: {
+    property3: 'MyType',
+  }
+})
+```
+
+**Type definition:**
+
+```ts
+type FilledData = Record<string, string>[];
+type Result = {
+  [key: string]: string | Result;
+};
+
+function filledDataToObject(
+  filledData: FilledData,
+  path: string[],
+  typeName: string,
+): Result;
+```

@@ -4,7 +4,11 @@ import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import PublicGoogleSheetsParser from 'public-google-sheets-parser';
 
-import { publicGoogleSheetsParser, googleSpreadsheet } from '../parser';
+import {
+  publicGoogleSheetsParser,
+  googleSpreadsheet,
+  filledDataToObject,
+} from '../parser';
 
 const expected = {
   click_conversation_data: {
@@ -98,5 +102,65 @@ describe.skip('GoogleSpreadsheet', () => {
     })();
 
     expect(parsed).toEqual(expected);
+  });
+});
+
+describe('filledDataToObject', () => {
+  it('Common forms', () => {
+    const filledData = [
+      {
+        Key: 'click_conversation_data',
+        Property: 'conversation_id',
+        Type: 'string',
+      },
+      {
+        Key: 'click_conversation_data',
+        Property: 'created_at',
+        Type: 'Date',
+      },
+      {
+        Key: 'click_conversation_data',
+        Property: 'agent_type',
+        Type: 'string',
+      },
+      {
+        Key: 'click_conversation_data',
+        Property: 'status',
+        Type: 'StatusEnum',
+      },
+      {
+        Key: 'click_conversation_data',
+        Property: 'generate_position',
+        Type: "conversation' | 'playground'",
+      },
+      {
+        Key: 'click_message_feedback_button',
+        Property: 'conversation_id',
+        Type: 'string',
+      },
+      {
+        Key: 'click_message_feedback_button',
+        Property: 'message_id',
+        Type: 'string',
+      },
+      {
+        Key: 'click_message_feedback_button',
+        Property: 'generate_position',
+        Type: '"conversation" | "playground"',
+      },
+      {
+        Key: 'click_message_feedback_button',
+        Property: 'my_test',
+        Type: "string | 'string'",
+      },
+    ];
+
+    const transformed = filledDataToObject(
+      filledData,
+      ['Key', 'Property'],
+      'Type',
+    );
+
+    expect(transformed).toEqual(expected);
   });
 });
