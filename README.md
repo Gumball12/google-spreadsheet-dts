@@ -6,6 +6,8 @@
 
 ![logo](./docs/logo-extended.png)
 
+> Check out the [Online Sandbox](https://gumball12.github.io/google-spreadsheet-dts/)!
+
 This library automatically generates TypeScript types (`*.d.ts`) by parsing Google Sheets.
 
 ## 💫 Features
