@@ -216,34 +216,6 @@ type GenerateDtsFileOptions = Partial<{
 
 To create a custom parser, see the [Writing a custom parser](./src/parser/README.md#writing-a-custom-parser) section.
 
-### `createDts`
-
-```ts
-function createDts(params: CreateDtsParams): string;
-
-type CreateDtsParams = {
-  name: string;
-  object: object;
-  options?: CreateDtsOptions;
-};
-
-type CreateDtsOptions = Partial<{
-  defaultType: string;
-  importTypes: Import[];
-}>;
-
-type Import = {
-  name: string;
-  from: string;
-};
-```
-
-- `name`: Name of the type.
-- `object`: Content for the types.
-- `options`
-  - `defaultType`: Type to use when the sheet type is an empty string, `undefined`, or `null`. Default is `any`.
-  - `importTypes`: Types to import from inside the file.
-
 ## License
 
 [MIT](./LICENSE) @Gumball12
