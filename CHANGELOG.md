@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.1.0...v0.1.1) (2024-03-09)
+
+
+### Bug Fixes
+
+* add @types/node ([1ce7325](https://github.com/Gumball12/google-spreadsheet-dts/commit/1ce73253add3e2701f3bb2a798af4988b6bc2cbb))
+* demo deployment action ([a7d6c87](https://github.com/Gumball12/google-spreadsheet-dts/commit/a7d6c8742439c78782a4644bf874666049a9da7c))
+
 ## [0.1.0](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.0.11...v0.1.0) (2024-03-09)
 
 
