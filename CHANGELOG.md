@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.0.10...v0.0.11) (2024-03-09)
+
+
+### Bug Fixes
+
+* dynamic import writeFile() for browser ([118c22b](https://github.com/Gumball12/google-spreadsheet-dts/commit/118c22b4a1d8e54cc1c0b3688f551ec0e19a949c))
+
 ### [0.0.10](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.0.9...v0.0.10) (2024-03-02)
 
 ### [0.0.9](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.0.8...v0.0.9) (2024-03-02)
