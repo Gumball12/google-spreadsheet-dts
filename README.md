@@ -23,8 +23,8 @@ Node.js v20.10.0
 
 $ pnpm bench
 
-name                                 hz      min      max     mean      p75      p99     p995     p999      rme  samples
-generateDtsFile :: 100000 Rows  18.4037  45.8886  75.3858  54.3369  57.0195  75.3858  75.3858  75.3858  ±12.36%       10   fastest
+name                               hz      min     max     mean      p75     p99    p995    p999     rme  samples
+createDtsBody :: 100000 Rows  10.6335  76.2435  116.52  94.0420  98.9237  116.52  116.52  116.52  ±9.26%       10   fastest
 ```
 
 [performance.bench.ts](./src/__tests__/performance.bench.ts)

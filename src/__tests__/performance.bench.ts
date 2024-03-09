@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 const src = resolve(__dirname, '../');
 
 describe('Benchmarking', () => {
-  bench('generateDtsFile :: 100000 Rows', async () => {
+  bench('createDtsBody :: 100000 Rows', async () => {
     const largeObject = [...Array(100000).keys()].reduce<object>((acc, cur) => {
       // @ts-expect-error - This is a test
       acc[`key${cur}`] = cur;
