@@ -1,5 +1,4 @@
 import { CreateDtsOptions, createDts } from './createDts';
-import { writeFile } from './writeFile';
 
 type GenerateDtsFileOptions = Partial<{
   fileName: string;
@@ -32,5 +31,6 @@ export const generateDtsFile = async ({
     return;
   }
 
+  const { writeFile } = await import('./writeFile');
   await writeFile(`${directory}/${fileName}.d.ts`, dts);
 };
