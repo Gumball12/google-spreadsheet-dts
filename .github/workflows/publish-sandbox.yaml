@@ -18,23 +18,21 @@ jobs:
         with:
           version: 8
 
-      - run: cd demo
-
       - uses: actions/cache@v3
         id: pnpm-cache
         with:
-          path: node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          path: demo/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('demo/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
       - if: steps.pnpm-cache.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: cd demo && pnpm install
 
-      - run: pnpm run build
+      - run: cd demo && pnpm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./demo/dist
