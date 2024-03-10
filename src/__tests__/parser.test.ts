@@ -82,27 +82,18 @@ const PRIVATE_SHEETS_SCOPES = [
   'https://www.googleapis.com/auth/spreadsheets.readonly',
 ];
 
-/**
- * # How to test
- * (Do not upload the private-key.json file to a public repository!)
- *
- * 1. Create a private-key.json file.
- *   This can be created using https://medium.com/@sakkeerhussainp/google-sheet-as-your-database-for-node-js-backend-a79fc5a6edd9 as a guide.
- * 2. The contents of the sheet should be the same as https://docs.google.com/spreadsheets/d/1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo/edit#gid=0.
- *   If you want to use different data, edit the `expected` variable.
- * 3. Change the `describe.skip` method to the `describe`. (`describe.skip(...)` -> `describe(...)`)
- * 4. Run the test with the `pnpm test` command.
- */
-describe.skip('GoogleSpreadsheet', () => {
-  it('Common forms', async () => {
-    // Do not upload the private-key.json file to a public repository when testing!
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const privateKey = await import('./private-key.json');
+const hasPrivate =
+  import.meta.env.VITE_PRIVATE_GOOGLE_SHEETS_CLIENT_EMAIL &&
+  import.meta.env.VITE_PRIVATE_GOOGLE_SHEETS_PRIVATE_KEY;
 
+describe.skipIf(!hasPrivate)('GoogleSpreadsheet', () => {
+  const privateEmail = import.meta.env.VITE_PRIVATE_GOOGLE_SHEETS_CLIENT_EMAIL;
+  const privateKey = import.meta.env.VITE_PRIVATE_GOOGLE_SHEETS_PRIVATE_KEY;
+
+  it('Common forms :: Pass sheet instance', async () => {
     const jwt = new JWT({
-      email: privateKey.client_email,
-      key: privateKey.private_key,
+      email: privateEmail,
+      key: privateKey,
       scopes: PRIVATE_SHEETS_SCOPES,
     });
 

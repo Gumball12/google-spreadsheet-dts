@@ -30,6 +30,14 @@ jobs:
       - if: steps.pnpm-cache.outputs.cache-hit != 'true'
         run: pnpm install
 
+      - name: env
+        run: |
+          echo "VITE_PRIVATE_GOOGLE_SHEETS_CLIENT_EMAIL=\"$VITE_PRIVATE_GOOGLE_SHEETS_CLIENT_EMAIL\"" >> .env
+          echo "VITE_PRIVATE_GOOGLE_SHEETS_PRIVATE_KEY=\"$VITE_PRIVATE_GOOGLE_SHEETS_PRIVATE_KEY\"" >> .env
+        env:
+          VITE_PRIVATE_GOOGLE_SHEETS_CLIENT_EMAIL: ${{ secrets.VITE_PRIVATE_GOOGLE_SHEETS_CLIENT_EMAIL }}
+          VITE_PRIVATE_GOOGLE_SHEETS_PRIVATE_KEY: ${{ secrets.VITE_PRIVATE_GOOGLE_SHEETS_PRIVATE_KEY }}
+
       - run: pnpm run lint
       - run: pnpm run build
       - run: pnpm run test
