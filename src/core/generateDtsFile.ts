@@ -1,9 +1,9 @@
-import { CreateDtsOptions, createDts } from './createDts';
+import { CreateDtsOptions, createDtsBody } from './createDtsBody';
 
 type GenerateDtsFileOptions = Partial<{
   fileName: string;
   output: (dts: string) => unknown;
-  createDts: CreateDtsOptions;
+  createDtsBody: CreateDtsOptions;
 }>;
 
 type Parser = () => Promise<object> | object;
@@ -24,7 +24,7 @@ export const generateDtsFile = async ({
   const fileName = options.fileName || name;
 
   const parsed = await parser();
-  const dts = createDts(fileName, parsed, options.createDts);
+  const dts = createDtsBody(fileName, parsed, options.createDtsBody);
 
   if (options.output) {
     options.output(dts);

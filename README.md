@@ -60,7 +60,7 @@ generateDtsFile({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
 
-  createDts: {
+  createDtsBody: {
     // Define the types to import in the dts file
     importTypes: [
       {
@@ -102,7 +102,7 @@ generateDtsFile({
   name: 'GoogleSheets',
   directory: resolve(__dirname, '../src'),
 
-  createDts: {
+  createDtsBody: {
     importTypes: [
       {
         name: 'StatusEnum',
@@ -202,7 +202,7 @@ type Parser = () => Promise<object> | object;
 type GenerateDtsFileOptions = Partial<{
   fileName: string;
   output: (dts: string) => unknown;
-  createDts: CreateDtsOptions;
+  createDtsBody: CreateDtsOptions;
 }>;
 ```
 
@@ -212,7 +212,7 @@ type GenerateDtsFileOptions = Partial<{
 - `options`
   - `fileName`: Name of the type file to generate. The default is the `name` parameter.
   - `output`: A function that defines how to use the generated types. By default, it saves to a file.
-  - `createDts`: Options to customize the contents of the generated type file. See the [`createDts`](#createdts) section for details.
+  - `createDtsBody`: Options to customize the contents of the generated type file. See the [`createDtsBody`](#createdtsbody) section for details.
 
 To create a custom parser, see the [Writing a custom parser](./src/parser/README.md#writing-a-custom-parser) section.
 

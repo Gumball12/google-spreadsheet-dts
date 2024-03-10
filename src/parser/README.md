@@ -132,7 +132,7 @@ See [publicGoogleSheetsParser API](#public-google-sheets-parser) for a detailed 
 
 ## Writing a custom parser
 
-The parser is a function that returns an object. The object structure can be arbitrarily defined and is passed to the [`createDts`](../core/createDts.ts) function.
+The parser is a function that returns an object. The object structure can be arbitrarily defined and is passed to the [`createDtsBody`](../core/createDtsBody.ts) function.
 
 The object property value becomes the type name. This can also be arbitrarily as well, but they will all be converted to string types.
 

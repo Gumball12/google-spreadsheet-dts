@@ -14,7 +14,7 @@ export type CreateDtsOptions = Partial<{
 
 type Import = { name: string; from: string };
 
-export const createDts = (
+export const createDtsBody = (
   name: string,
   object: object,
   options = {} as CreateDtsOptions,
