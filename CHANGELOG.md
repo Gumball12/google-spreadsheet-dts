@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.1.1...v0.2.0) (2024-03-10)
+
+
+### Features
+
+* make googleSpreadsheet() available for an instance or options ([e173e46](https://github.com/Gumball12/google-spreadsheet-dts/commit/e173e46045fb59a7966d991f277be7957cd505b3))
+* make publicGoogleSheetsParser() available for an instance or options ([db30d0a](https://github.com/Gumball12/google-spreadsheet-dts/commit/db30d0a658f84d7580e1731f4b40e1ddd5d9c946))
+* testing googleSpreadsheet() in the CI action with GitHub Secrets ([01feda8](https://github.com/Gumball12/google-spreadsheet-dts/commit/01feda8effb81e7c2df280dba327f049983814a7))
+
 ### [0.1.1](https://github.com/Gumball12/google-spreadsheet-dts/compare/v0.1.0...v0.1.1) (2024-03-09)
 
 
