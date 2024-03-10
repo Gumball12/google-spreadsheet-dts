@@ -115,7 +115,9 @@ generateDtsFile({
   }
 
   parser: publicGoogleSheetsParser(
-    new PublicGoogleSheetsParser(/* ... */),
+    {
+      spreadsheetId: '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo',
+    },
     {
       path: ['Key', 'Property'],
       typeName: 'Type',
@@ -156,7 +158,9 @@ generateDtsFile({
   }
 
   parser: publicGoogleSheetsParser(
-    new PublicGoogleSheetsParser(/* ... */),
+    {
+      spreadsheetId: '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo',
+    },
     {
       path: ['Key', 'Property'],
       typeName: 'Type',

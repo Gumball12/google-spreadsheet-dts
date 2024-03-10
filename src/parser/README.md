@@ -17,7 +17,9 @@ import PublicGoogleSheetsParser from 'public-google-sheets-parser';
 
 // Define parser
 const parser = publicGoogleSheetsParser(
-  new PublicGoogleSheetsParser(/* ... */),
+  {
+    spreadsheetId: '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo',
+  },
   {
     path: ['Key', 'Property'],
     typeName: 'Type',
@@ -38,15 +40,32 @@ generateDtsFile({
 
 ```ts
 function publicGoogleSheetsParser(
-  publicGoogleSheetsParserInstance: PublicGoogleSheetsParser,
+  instanceOrOptions: PublicGoogleSheetsParser | PublicGoogleSheetsParserOptions,
   params: {
     path: string[];
     typeName: string;
   },
 ): Parser;
+
+interface PublicGoogleSheetsParserOptions {
+  spreadsheetId: string;
+  sheetInfo:
+    | SheetName
+    | {
+        sheetName?: SheetName;
+        sheetId?: GID;
+      };
+}
+
+type SheetName = string;
+type GID = string;
 ```
 
-- `publicGoogleSheetsParserInstance`: An instance of [`PublicGoogleSheetsParser`](https://github.com/fureweb-com/public-google-sheets-parser?tab=readme-ov-file#usage-example)
+- `instanceOrOptions`: An instance of [`PublicGoogleSheetsParser`](https://github.com/fureweb-com/public-google-sheets-parser?tab=readme-ov-file#usage-example) or an object with the following properties:
+  - `spreadsheetId`: The ID of the Google Sheets
+  - `sheetInfo`: The sheet name or an object with the following properties:
+    - `sheetName`: The sheet name
+    - `sheetId`: The sheet ID
 - `path`: List of column names where object property names exists
 - `typeName`: Column name where the type name exists
 
@@ -61,17 +80,17 @@ For example, given the following Google Sheets:
 If `path` is `['Key', 'Property']` and `typeName` is `Type`, the return will look like this:
 
 ```ts
-{
+({
   key1: {
-    property1: "'type1'";
-  }
+    property1: "'type1'",
+  },
   key2: {
-    property2: "'type2'";
-  }
+    property2: "'type2'",
+  },
   key3: {
-    property3: 'MyType';
-  }
-}
+    property3: 'MyType',
+  },
+});
 ```
 
 ## google-spreadsheet (node-google-spreadsheet)
@@ -139,11 +158,11 @@ The object property value becomes the type name. This can also be arbitrarily as
 If you want the generated type to point to an actual type, just pass the type name as a string.
 
 ```ts
-{
+({
   key: {
-    property: 'MyType' | 'YourType';
-  }
-}
+    property: 'MyType' | 'YourType',
+  },
+});
 ```
 
 ```ts
@@ -161,11 +180,11 @@ declare global {
 If you want the generated type to be a string type, pass a string wrapped in quotes (`''` or `""`).
 
 ```ts
-{
+({
   key: {
-    property: "'MyType' | 'YourType'";
-  }
-}
+    property: "'MyType' | 'YourType'",
+  },
+});
 ```
 
 ```ts
@@ -183,11 +202,11 @@ declare global {
 These can be mixed and matched.
 
 ```ts
-{
+({
   key: {
-    property: 'MyType' | "'YourType'";
-  }
-}
+    property: 'MyType' | "'YourType'",
+  },
+});
 ```
 
 ```ts
@@ -223,14 +242,14 @@ filledDataToObject(
 ({
   key1: {
     property1: 'type1',
-  }
+  },
   key2: {
     property2: 'type2',
-  }
+  },
   key3: {
     property3: 'MyType',
-  }
-})
+  },
+});
 ```
 
 **Type definition:**

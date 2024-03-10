@@ -38,9 +38,24 @@ describe('publicGoogleSheetsParser', () => {
     },
   );
 
-  it('Common forms', async () => {
+  it('Common forms :: Pass instance', async () => {
     const parsed = await publicGoogleSheetsParser(
       publicGoogleSheetsParserInstance,
+      {
+        path: ['Key', 'Property'],
+        typeName: 'Type',
+      },
+    )();
+
+    expect(parsed).toEqual(expected);
+  });
+
+  it('Common forms :: Pass options', async () => {
+    const parsed = await publicGoogleSheetsParser(
+      {
+        spreadsheetId: SPREADSHEET_ID,
+        sheetInfo: SHEET_NAME,
+      },
       {
         path: ['Key', 'Property'],
         typeName: 'Type',

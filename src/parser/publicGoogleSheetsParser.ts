@@ -1,7 +1,4 @@
-// Parser for public-google-sheets-parser
-// https://github.com/fureweb-com/public-google-sheets-parser
-
-import type PublicGoogleSheetsParser from 'public-google-sheets-parser';
+import PublicGoogleSheetsParser from 'public-google-sheets-parser';
 import { FilledData } from './types/data';
 import { filledDataToObject } from './utils/filledDataToObject';
 
@@ -10,13 +7,21 @@ type PublicGoogleSheetsParserParams = {
   typeName: string;
 };
 
+type PublicGoogleSheetsParserOptions = {
+  spreadsheetId: ConstructorParameters<typeof PublicGoogleSheetsParser>[0];
+  sheetInfo: ConstructorParameters<typeof PublicGoogleSheetsParser>[1];
+};
+
 export const publicGoogleSheetsParser =
   (
-    publicGoogleSheetsParserInstance: PublicGoogleSheetsParser,
+    instanceOrOptions:
+      | PublicGoogleSheetsParser
+      | PublicGoogleSheetsParserOptions,
     { path, typeName }: PublicGoogleSheetsParserParams,
   ) =>
   async (): Promise<object> => {
-    const parsedData = await publicGoogleSheetsParserInstance.parse();
+    const instance = getPublicGoogleSheetsParserInstance(instanceOrOptions);
+    const parsedData = await instance.parse();
     const filledData = parsedData.map<FilledData[number]>(
       (item, index, data) => {
         if (index === 0) {
@@ -35,3 +40,14 @@ export const publicGoogleSheetsParser =
 
     return filledDataToObject(filledData, path, typeName);
   };
+
+const getPublicGoogleSheetsParserInstance = (
+  instanceOrOptions: PublicGoogleSheetsParser | PublicGoogleSheetsParserOptions,
+) => {
+  if (instanceOrOptions instanceof PublicGoogleSheetsParser) {
+    return instanceOrOptions;
+  }
+
+  const { spreadsheetId, sheetInfo } = instanceOrOptions;
+  return new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);
+};
