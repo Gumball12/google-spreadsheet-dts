@@ -1,8 +1,5 @@
 import { describe, bench } from 'vitest';
-import { generateDtsFile } from '..';
-import { resolve } from 'node:path';
-
-const src = resolve(__dirname, '../');
+import { createDtsBody } from '../core/createDtsBody';
 
 describe('Benchmarking', () => {
   bench('createDtsBody :: 100000 Rows', async () => {
@@ -12,13 +9,6 @@ describe('Benchmarking', () => {
       return acc;
     }, {});
 
-    await generateDtsFile({
-      name: 'GenerateDtsFile',
-      directory: resolve(src, './__tests__'),
-      parser: () => largeObject,
-      options: {
-        output: () => {},
-      },
-    });
+    await createDtsBody('largeObject', largeObject);
   });
 });
