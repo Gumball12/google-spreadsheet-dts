@@ -1,5 +1,5 @@
 export { publicGoogleSheetsParser } from './publicGoogleSheetsParser';
-export { googleSpreadsheet } from './googleSpreadsheet';
+export { privateGoogleSheetsParser } from './privateGoogleSheetsParser';
 
 // Utils
 export { filledDataToObject } from './utils/filledDataToObject';

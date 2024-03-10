@@ -5,7 +5,7 @@ import {
 import { filledDataToObject } from './utils/filledDataToObject';
 import { FilledData } from './types/data';
 
-type GoogleSpreadsheetParams = {
+type PrivateGoogleSheetsParserParams = {
   path: string[];
   typeName: string;
 };
@@ -13,16 +13,18 @@ type GoogleSpreadsheetParams = {
 type SheetName = string;
 type SheetIndex = number;
 
-type GoogleSpreadsheetOptions = {
+type PrivateGoogleSheetsParserOptions = {
   auth: ConstructorParameters<typeof GoogleSpreadsheet>[1];
   spreadsheetId: ConstructorParameters<typeof GoogleSpreadsheet>[0];
   sheetInfo: SheetName | SheetIndex;
 };
 
-export const googleSpreadsheet =
+export const privateGoogleSheetsParser =
   (
-    instanceOfOptions: GoogleSpreadsheetWorksheet | GoogleSpreadsheetOptions,
-    { path, typeName }: GoogleSpreadsheetParams,
+    instanceOfOptions:
+      | GoogleSpreadsheetWorksheet
+      | PrivateGoogleSheetsParserOptions,
+    { path, typeName }: PrivateGoogleSheetsParserParams,
   ) =>
   async (): Promise<object> => {
     const sheetInstance = await getSheetInstance(instanceOfOptions);
@@ -43,7 +45,9 @@ export const googleSpreadsheet =
   };
 
 const getSheetInstance = async (
-  instanceOfOptions: GoogleSpreadsheetWorksheet | GoogleSpreadsheetOptions,
+  instanceOfOptions:
+    | GoogleSpreadsheetWorksheet
+    | PrivateGoogleSheetsParserOptions,
 ) => {
   if (instanceOfOptions instanceof GoogleSpreadsheetWorksheet) {
     return instanceOfOptions;

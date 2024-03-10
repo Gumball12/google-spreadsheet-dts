@@ -6,7 +6,7 @@ import PublicGoogleSheetsParser from 'public-google-sheets-parser';
 
 import {
   publicGoogleSheetsParser,
-  googleSpreadsheet,
+  privateGoogleSheetsParser,
   filledDataToObject,
 } from '../parser';
 
@@ -102,7 +102,7 @@ describe.skipIf(!hasPrivate)('GoogleSpreadsheet', () => {
 
     const sheetInstance = doc.sheetsByIndex[0];
 
-    const parsed = await googleSpreadsheet(sheetInstance, {
+    const parsed = await privateGoogleSheetsParser(sheetInstance, {
       path: ['Key', 'Property'],
       typeName: 'Type',
     })();
@@ -117,7 +117,7 @@ describe.skipIf(!hasPrivate)('GoogleSpreadsheet', () => {
       scopes: PRIVATE_SHEETS_SCOPES,
     });
 
-    const parsed = await googleSpreadsheet(
+    const parsed = await privateGoogleSheetsParser(
       {
         auth: jwt,
         spreadsheetId: SPREADSHEET_ID,
