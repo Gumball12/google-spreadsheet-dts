@@ -109,6 +109,28 @@ describe.skipIf(!hasPrivate)('GoogleSpreadsheet', () => {
 
     expect(parsed).toEqual(expected);
   });
+
+  it('Common forms :: Pass options', async () => {
+    const jwt = new JWT({
+      email: privateEmail,
+      key: privateKey,
+      scopes: PRIVATE_SHEETS_SCOPES,
+    });
+
+    const parsed = await googleSpreadsheet(
+      {
+        auth: jwt,
+        spreadsheetId: SPREADSHEET_ID,
+        sheetInfo: 0,
+      },
+      {
+        path: ['Key', 'Property'],
+        typeName: 'Type',
+      },
+    )();
+
+    expect(parsed).toEqual(expected);
+  });
 });
 
 describe('filledDataToObject', () => {

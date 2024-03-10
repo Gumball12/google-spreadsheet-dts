@@ -13,10 +13,9 @@ A parser that parses **public** Google Sheets. This parser uses [public-google-s
 import { generateDtsFile } from 'google-spreadsheet-dts';
 import { publicGoogleSheetsParser } from 'google-spreadsheet-dts/parser';
 
-import PublicGoogleSheetsParser from 'public-google-sheets-parser';
-
 // Define parser
 const parser = publicGoogleSheetsParser(
+  // You can pass an instance of PublicGoogleSheetsParser
   {
     spreadsheetId: '1j23zhzHcPd_LzDQ7uPrXgMJfPoZYs289boUKoKnAjUo',
   },
@@ -102,22 +101,21 @@ A parser that parses **private** Google Sheets. This parser uses [google-spreads
 ```ts
 import { generateDtsFile } from 'google-spreadsheet-dts';
 import { googleSpreadsheet } from 'google-spreadsheet-dts/parser';
-
 import { JWT } from 'google-auth-library';
-import { GoogleSpreadsheet } from 'google-spreadsheet';
-
-// Load private Google Sheets data
-const jwt = new JWT(/* ... */);
-const doc = new GoogleSpreadsheet(/* ... */);
-await doc.loadInfo();
-
-const sheet = doc.sheetsByIndex[0];
 
 // Define parser
-const parser = googleSpreadsheet(sheet, {
-  path: ['Key', 'Property'],
-  typeName: 'Type',
-});
+// You can pass an instance of GoogleSpreadsheetWorksheet
+const parser = googleSpreadsheet(
+  {
+    auth: new JWT(/* ... */),
+    spreadsheetId: '...',
+    sheetInfo: 0, // Index of the sheet
+  },
+  {
+    path: ['Key', 'Property'],
+    typeName: 'Type',
+  },
+);
 
 // Generate d.ts file
 generateDtsFile({
@@ -135,15 +133,27 @@ Note that you need to pass the [sheet instance](https://theoephraim.github.io/no
 
 ```ts
 function googleSpreadsheet(
-  sheetInstance: GoogleSpreadsheetWorksheet,
+  instanceOrOptions: GoogleSpreadsheetWorksheet | GoogleSpreadsheetOptions,
   params: {
     path: string[];
     typeName: string;
   },
 ): Parser;
+
+interface GoogleSpreadsheetOptions {
+  auth: JWT;
+  spreadsheetId: string;
+  sheetInfo: SheetName | SheetIndex;
+}
+
+type SheetName = string;
+type SheetIndex = number;
 ```
 
-- `sheetInstance`: An instance of [`GoogleSpreadsheetWorksheet`](https://theoephraim.github.io/node-google-spreadsheet/#/classes/google-spreadsheet-worksheet)
+- `sheetInstance`: An instance of [`GoogleSpreadsheetWorksheet`](https://theoephraim.github.io/node-google-spreadsheet/#/classes/google-spreadsheet-worksheet) or an object with the following properties:
+  - `auth`: An instance of [`JWT`](https://www.npmjs.com/package/google-auth-library#json-web-tokens) from [`google-auth-library`](https://www.npmjs.com/package/google-auth-library)
+  - `spreadsheetId`: The ID of the Google Sheets
+  - `sheetInfo`: The sheet name or the index of the sheet
 - `path`: List of column names where object property names exists
 - `typeName`: Column name where the type name exists
 
