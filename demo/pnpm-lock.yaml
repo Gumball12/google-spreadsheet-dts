@@ -1745,8 +1745,8 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /dompurify@2.4.7:
-    resolution: {integrity: sha512-kxxKlPEDa6Nc5WJi+qRgPbOAbgTpSULL+vI3NUXsZMlkJxTqYI9wg5ZTay2sFrdZRWHPWNi+EdAhcJf81WtoMQ==}
+  /dompurify@2.5.6:
+    resolution: {integrity: sha512-zUTaUBO8pY4+iJMPE1B9XlO2tXVYIcEA4SNGtvDELzTSCQO7RzH+j7S180BmhmJId78lqGU2z19vgVx2Sxs/PQ==}
     dev: false
 
   /duplexer@0.1.2:
@@ -2145,7 +2145,7 @@ packages:
       '@handsontable/pikaday': 1.0.0
       '@types/pikaday': 1.7.4
       core-js: 3.36.0
-      dompurify: 2.4.7
+      dompurify: 2.5.6
       moment: 2.29.4
       numbro: 2.1.2
       pikaday: 1.8.2
